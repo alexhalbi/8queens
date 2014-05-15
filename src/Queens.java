@@ -1,10 +1,10 @@
 public class Queens {
 	static public void main(String args[]) {
-		int mut = 5;
+		int mut = 5;		//Mutationrate
 		long zstVorher;
 		long zstNachher;
 		zstVorher = System.currentTimeMillis();
-		Genetics g = new Genetics(4);
+		Genetics g = new Genetics(4);	//Number of initial Population
 		System.out.println("---------G---------");
 		g.generateGenerations();
 		g.print();
@@ -16,6 +16,8 @@ public class Queens {
 			g.mutateBretter(mut);
 		}
 		zstNachher = System.currentTimeMillis();
-		System.out.println("Zeit benötigt: " + ((zstNachher - zstVorher)) + " millisec");
+		System.out.println("------------------");
+		System.out.println("Zeit benötigt: " + ((zstNachher - zstVorher)) + " millisec\nLösung:");
+		g.bestBoard().print();
 	}
 }
