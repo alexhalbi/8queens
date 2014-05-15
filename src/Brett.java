@@ -47,12 +47,6 @@ public class Brett {
 				if(Math.abs(queens[i]-queens[j])==Math.abs(i-j)) f++;
 			}
 		}
-	/*	for (int a = 0; a < n; a++) {
-			for (int i = 0; i < n; i++) {
-				if (queens[a] == queens[i])
-					f+=1000;
-			}
-		}*/
 		return f/2-4;
 	}
 
