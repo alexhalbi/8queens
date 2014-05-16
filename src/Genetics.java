@@ -3,23 +3,39 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * Class with the Genetic Functions. 
+ */
 public class Genetics {
 
-	private LinkedList<Brett> bretter;
-	private int gens;
+	/** The Collection of the Population */
+	private LinkedList<Board> bretter;
+	
+	/** The number of the initial population */
+	private int population;
+	
+	/** The size of the Boards n*n */
 	private int size = 8;
 
+	/**
+	 * Instantiates a new genetics to access the Mathods for generating the solution.
+	 *
+	 * @param The number of the initial population
+	 */
 	public Genetics(int generations) {
 		bretter = new LinkedList<>();
-		gens = generations;
+		population = generations;
 	}
 
-	public void generateGenerations() {
-		for (int i = 0; i < gens; i++) {
+	/**
+	 * Generates population.
+	 */
+	public void generatePopulation() {
+		for (int i = 0; i < population; i++) {
 			int a;
-			Brett b;
+			Board b;
 			do {
-				b = new Brett(size);
+				b = new Board(size);
 				b.generateQueens();
 				a = bretter.indexOf(b);
 			} while (a != -1);
@@ -27,19 +43,25 @@ public class Genetics {
 		}
 	}
 
+	/**
+	 * Prints the whole Population.
+	 */
 	public void print() {
 		for (int i = 0; i < bretter.size(); i++) {
 			System.out.println("Brett " + (i) + ":");
-			Brett brett = bretter.get(i);
+			Board brett = bretter.get(i);
 			brett.print();
 			System.out.println("Fitness: " + brett.fitness() + "\n");
 		}
 	}
 
+	/**
+	 * Rank the population with the fitness (less fitness first!).
+	 */
 	public void rank() {
-		Collections.sort(bretter, new Comparator<Brett>() {
+		Collections.sort(bretter, new Comparator<Board>() {
 			@Override
-			public int compare(Brett o1, Brett o2) {
+			public int compare(Board o1, Board o2) {
 				int f2 = o2.fitness();
 				int f1 = o1.fitness();
 				if (f2 > f1) {
@@ -52,15 +74,18 @@ public class Genetics {
 		});
 	}
 
-	public void crossoverBretter() {
+	/**
+	 * Crossover the whole Population.
+	 */
+	public void crossoverBoards() {
 		rank();
-		Iterator<Brett> i = bretter.iterator();
-		LinkedList<Brett> b = new LinkedList<>(bretter);
-		Brett b1 = null;
-		Brett b2 = null;
-		for (int a = 0; a < gens; a++) {
+		Iterator<Board> i = bretter.iterator();
+		LinkedList<Board> b = new LinkedList<>(bretter);
+		Board b1 = null;
+		Board b2 = null;
+		for (int a = 0; a < population; a++) {
 			b2 = i.next();
-			Brett n = crossover(b1, b2);
+			Board n = crossover(b1, b2);
 			b.set(a, n);
 			b1 = b2;
 		}
@@ -68,16 +93,26 @@ public class Genetics {
 		rank();
 	}
 
-	public static Brett crossover(Brett b1, Brett b2) {
+	/**
+	 * Crossover 2 Boards.
+	 * split in half, then randomly 1 half with another half
+	 *
+	 * After that correction of wrong queens! 
+	 *
+	 * @param b1 first board
+	 * @param b2 second board
+	 * @return the crossover board
+	 */
+	public static Board crossover(Board b1, Board b2) {
 		if (b1 == null)
 			return b2;
 		if (b2 == null)
 			return b1;
 		if (b1.size() != b2.size())
 			return null;
-		Brett b = new Brett(b1.size());
+		Board b = new Board(b1.size());
 		if(Math.random()>0.5) {
-			Brett s = b1;
+			Board s = b1;
 			b1 = b2;
 			b2 = s;
 		}
@@ -88,23 +123,35 @@ public class Genetics {
 				b.setQueen(i, b2.getQueen(i));
 			}
 		}
-		b.repairBrett();
+		b.repairBoard();
 		return b;
 	}
 
-	public void mutateBretter(int mut) {
+	/**
+	 * Mutate all Boards
+	 *
+	 * @param mut the mutation rate in percent
+	 */
+	public void mutateBoards(int mut) {
 		int a = (bretter.size()-1) * mut / 100;
 		if (mut > 0 && a < 1)
 			a = 1;
 		for (int i = 0; i < a; i++) {
 			int pos = (int) (Math.random() * (bretter.size()-1));
 			bretter.set(pos, mutateBrett(bretter.get(pos), mut));
-			bretter.get(pos).repairBrett();
+			bretter.get(pos).repairBoard();
 		}
 	}
 
-	public static Brett mutateBrett(Brett b, int mut) {
-		Brett n = new Brett(b.size());
+	/**
+	 * Mutate one board.
+	 *
+	 * @param b the board to mutate
+	 * @param mut the mutation rate
+	 * @return the mutated board
+	 */
+	public static Board mutateBrett(Board b, int mut) {
+		Board n = new Board(b.size());
 		int a = Math.round(n.size() ^ 2 * mut / 100);
 		if (mut > 0 && a < 1)
 			a = 1;
@@ -118,7 +165,12 @@ public class Genetics {
 		return n;
 	}
 
-	public Brett bestBoard() {
+	/**
+	 * Best board.
+	 *
+	 * @return the brett
+	 */
+	public Board bestBoard() {
 		return bretter.getFirst();
 	}
 

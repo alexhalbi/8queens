@@ -1,16 +1,39 @@
-public class Brett {
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Board.
+ * 1 quadratic board with queens
+ */
+public class Board {
+	
+	/** The size of the board n*n */
 	private int n;
+	
+	/** The queens Array which saves the positions of the queens
+	 * Array Index = Y Coordinate
+	 * Array Value = X Coordinate */
 	private byte queens[];
 
-	public Brett(int n) {
+	/**
+	 * Instantiates a new board.
+	 *
+	 * @param n The size of the board n*n
+	 */
+	public Board(int n) {
 		this.n = n;
 		queens = new byte[n];
 	}
 	
+	/**
+	 * @return The size of the board n*n
+	 */
 	public int size() {
 		return n;
 	}
 
+	/**
+	 * Populate Board with random Queens.
+	 * No Queen can be in the same row or column than another queen!
+	 */
 	public void generateQueens() {
 		for (int i = 0; i < n; i++) {
 			byte r = (byte) (Math.random() * n);
@@ -25,6 +48,9 @@ public class Brett {
 		}
 	}
 
+	/**
+	 * Prints the board in the Console.
+	 */
 	public void print() {
 		for (int i = 0; i < n; i++) {
 			int a = 0;
@@ -40,6 +66,13 @@ public class Brett {
 		}
 	}
 
+	/**
+	 * The Fitness of the board.
+	 * Lower is better!
+	 * 0 is the solution of the Problem
+	 *
+	 * @return the Fitness
+	 */
 	public int fitness() {		//|q[i]-q[j]|=|i-j|
 		int f = 0;
 		for(int i = 0; i<n;i++) {
@@ -50,25 +83,48 @@ public class Brett {
 		return f/2-4;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 * 
+	 * Returns if one Board equals another.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		try {
-			Brett b = (Brett) obj;
+			Board b = (Board) obj;
 			return b.queens.equals(queens);
 		} catch (Exception e) {
 			return super.equals(obj);
 		}
 	}
 	
+	/**
+	 * Sets one queen at a position
+	 *
+	 * @param i The Index of the Queen (Y-Coordinate)
+	 * @param val The Value to set (X-Coordinate)
+	 */
 	public void setQueen(int i, byte val) {
 		queens[i] = val;
 	}
 	
+	/**
+	 * Returns the Value in the Queen Array.
+	 * Y-Coordinate gives back X-Coordinate
+	 *
+	 * @param i The Index to return (Y-Coordinate)
+	 * @return The Value of the specific Index (X-Coordinate)
+	 */
 	public byte getQueen(int i) {
 		return queens[i];
 	}
 	
-	public void repairBrett() {
+	/**
+	 * Repairs the board.
+	 * Resolves worng values in the Array 
+	 * (Only one Queen per Row and Collumn!)
+	 */
+	public void repairBoard() {
 		for (int a = 0; a < size(); a++) {
 			for (int ab = 0; ab < size(); ab++) {
 				if (a==ab)  {
