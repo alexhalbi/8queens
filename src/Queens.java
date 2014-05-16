@@ -14,7 +14,8 @@ public class Queens {
 		System.out.println("---------G---------");
 		g.generatePopulation();
 		g.print();
-		for (int i = 1; g.bestBoard().fitness() > 0; i++) {	//search until solution
+		int i = 0;
+		for (; g.bestBoard().fitness() > 0; i++) {	//search until solution
 		//for (int i = 1; i <= 10; i++) {		//search 10 times
 			System.out.println("---------" + i + "---------");
 			g.crossoverBoards();
@@ -23,7 +24,8 @@ public class Queens {
 		}
 		zstNachher = System.currentTimeMillis();
 		System.out.println("------------------");
-		System.out.println("Zeit benötigt: " + ((zstNachher - zstVorher)) + " millisec\nLösung:");
+		System.out.println("Zeit benötigt: " + ((zstNachher - zstVorher)) + " millisec");
+		System.out.println(i+" Generationen\nLösung:");
 		g.bestBoard().print();
 	}
 }
