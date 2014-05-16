@@ -6,10 +6,10 @@ public class Queens {
 	 * @param args There are no arguments!
 	 */
 	static public void main(String args[]) {
-		int mut = 5;		//Mutationrate
-		long zstVorher;
-		long zstNachher;
-		zstVorher = System.currentTimeMillis();
+		int mut = 5;		//mutation rate
+		long finishT;
+		long startT;
+		finishT = System.currentTimeMillis();
 		Genetics g = new Genetics(4);	//Number of initial Population
 		System.out.println("---------G---------");
 		g.generatePopulation();
@@ -22,10 +22,10 @@ public class Queens {
 			g.print();
 			g.mutateBoards(mut);
 		}
-		zstNachher = System.currentTimeMillis();
+		startT = System.currentTimeMillis();
 		System.out.println("------------------");
-		System.out.println("Zeit benötigt: " + ((zstNachher - zstVorher)) + " millisec");
-		System.out.println(i+" Generationen\nLösung:");
+		System.out.println("Time: " + ((startT - finishT)) + " millisec");
+		System.out.println(i+" Generations\nSolution:");
 		g.bestBoard().print();
 	}
 }
