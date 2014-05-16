@@ -20,7 +20,7 @@ public class Genetics {
 	/**
 	 * Instantiates a new genetics to access the Mathods for generating the solution.
 	 *
-	 * @param The number of the initial population
+	 * @param generations The number of the initial population
 	 */
 	public Genetics(int generations) {
 		bretter = new LinkedList<>();
