@@ -1,4 +1,3 @@
-// TODO: Auto-generated Javadoc
 /**
  * The Class Board.
  * 1 quadratic board with queens
