@@ -18,7 +18,8 @@ public class Genetics {
 	private int size = 8;
 
 	/**
-	 * Instantiates a new genetics to access the Mathods for generating the solution.
+	 * Instantiates a new genetics to access the Methods for generating the solution.
+	 * Size of the board = 8
 	 *
 	 * @param generations The number of the initial population
 	 */
@@ -168,7 +169,7 @@ public class Genetics {
 	/**
 	 * Best board.
 	 *
-	 * @return the brett
+	 * @return the board
 	 */
 	public Board bestBoard() {
 		return bretter.getFirst();

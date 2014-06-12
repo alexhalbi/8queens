@@ -120,8 +120,8 @@ public class Board {
 	
 	/**
 	 * Repairs the board.
-	 * Resolves worng values in the Array 
-	 * (Only one Queen per Row and Collumn!)
+	 * Resolves wrong values in the Array 
+	 * (Only one Queen per Row and Column!)
 	 */
 	public void repairBoard() {
 		for (int a = 0; a < size(); a++) {
