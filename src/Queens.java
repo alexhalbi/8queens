@@ -6,17 +6,16 @@ public class Queens {
 	 * @param args There are no arguments!
 	 */
 	static public void main(String args[]) {
-		int mut = 5;		//mutation rate
+		int mut = 5; //mutation rate
 		long finishT;
 		long startT;
 		finishT = System.currentTimeMillis();
-		Genetics g = new Genetics(4);	//Number of initial Population
+		Genetics g = new Genetics(4,8);	//Number of initial Population, Size of board
 		System.out.println("---------G---------");
 		g.generatePopulation();
 		g.print();
 		int i = 0;
 		for (; g.bestBoard().fitness() > 0; i++) {	//search until solution
-		//for (int i = 1; i <= 10; i++) {		//search 10 times
 			System.out.println("---------" + i + "---------");
 			g.crossoverBoards();
 			g.print();

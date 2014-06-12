@@ -27,6 +27,18 @@ public class Genetics {
 		bretter = new LinkedList<>();
 		population = generations;
 	}
+	
+	/**
+	 * Instantiates a new genetics to access the Methods for generating the solution.
+	 *
+	 * @param generations The number of the initial population
+	 * @param size The size of the board
+	 */
+	public Genetics(int generations, int size) {
+		this.size = size;
+		bretter = new LinkedList<>();
+		population = generations;
+	}
 
 	/**
 	 * Generates population.
